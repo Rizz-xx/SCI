@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  questionText String
+  imageUrl     String?
+  category     String   // organ, proses, enzim, penyerapan, lab
+  objective    Int      // 1-5 sesuai tujuan pembelajaran
+  options      Option[]
+  answers      QuizAnswer[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("questions")
+}
+
+model Option {
+  id          String   @id @default(cuid())
+  text        String
+  isCorrect   Boolean  @default(false)
+  explanation String?
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@map("options")
+}
+
+model QuizSession {
+  id             String       @id @default(cuid())
+  studentName    String?
+  totalScore     Int          @default(0)
+  totalCorrect   Int          @default(0)
+  totalWrong     Int          @default(0)
+  totalQuestions Int          @default(0)
+  percentage     Float        @default(0)
+  answers        QuizAnswer[]
+  completedAt    DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@map("quiz_sessions")
+}
+
+model QuizAnswer {
+  id               String      @id @default(cuid())
+  sessionId        String
+  session          QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionId       String
+  question         Question    @relation(fields: [questionId], references: [id])
+  selectedOptionId String
+  isCorrect        Boolean
+  answeredAt       DateTime    @default(now())
+
+  @@map("quiz_answers")
+}
