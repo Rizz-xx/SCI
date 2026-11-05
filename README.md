@@ -130,14 +130,14 @@ npm run build
 
 Semua endpoint backend menggunakan prefix `/api`.
 
-| Method | Endpoint | Kegunaan |
-| --- | --- | --- |
-| `GET` | `/api/quiz/questions` | Mengambil daftar soal dan pilihan jawaban |
-| `POST` | `/api/quiz/submit` | Memeriksa jawaban dan mengembalikan pembahasan |
-| `POST` | `/api/quiz/complete` | Menyimpan hasil akhir sesi kuis |
-| `POST` | `/api/progress/session` | Membuat sesi belajar/kuis |
-| `GET` | `/api/progress/session/:id` | Mengambil detail sesi |
-| `GET` | `/api/progress/history` | Mengambil hingga 20 hasil sesi terbaru |
+| Method | Endpoint                    | Kegunaan                                       |
+| ------ | --------------------------- | ---------------------------------------------- |
+| `GET`  | `/api/quiz/questions`       | Mengambil daftar soal dan pilihan jawaban      |
+| `POST` | `/api/quiz/submit`          | Memeriksa jawaban dan mengembalikan pembahasan |
+| `POST` | `/api/quiz/complete`        | Menyimpan hasil akhir sesi kuis                |
+| `POST` | `/api/progress/session`     | Membuat sesi belajar/kuis                      |
+| `GET`  | `/api/progress/session/:id` | Mengambil detail sesi                          |
+| `GET`  | `/api/progress/history`     | Mengambil hingga 20 hasil sesi terbaru         |
 
 ## Struktur folder
 
